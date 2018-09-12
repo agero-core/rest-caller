@@ -1,1 +1,1 @@
-# rest-caller
+Framework to make RESTful calls.
