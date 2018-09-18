@@ -23,7 +23,7 @@ var getResponse = await caller.GetAsync(
 
 * Make POST RESTfull call
 ```csharp
-// Making GET call to https://jsonplaceholder.typicode.com/posts?userId=1 
+// Making GET call to https://jsonplaceholder.typicode.com/posts
 var postResponse = await caller.PostAsync(
     uri: new Uri("https://jsonplaceholder.typicode.com/posts"),
     body: @"{ ""title"": ""foo"", ""body"": ""bar"", ""userId"": 1 }");
