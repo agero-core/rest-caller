@@ -12,7 +12,7 @@ namespace Agero.Core.RestCaller.Tests
         public async Task Get()
         {
             // Arrange
-            var restCaller = new RestCaller();
+            var restCaller = new RESTCaller();
 
             var uri = new Uri("https://api.nuget.org/v3/index.json");
 
@@ -30,7 +30,7 @@ namespace Agero.Core.RestCaller.Tests
         public async Task Get_When_Resource_Does_Not_Exist()
         {
             // Arrange
-            var restCaller = new RestCaller();
+            var restCaller = new RESTCaller();
 
             var uri = new Uri("https://api.nuget.org/v3/does_not_exist.json");
 

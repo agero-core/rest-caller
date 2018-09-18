@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace Agero.Core.RestCaller.Extensions
 {
     /// <summary>REST Caller extensions</summary>
-    public static class RestCallerExtensions
+    public static class RESTCallerExtensions
     {
         /// <summary>Makes GET request</summary>
         /// <param name="restCaller">REST Caller</param>
@@ -17,12 +17,11 @@ namespace Agero.Core.RestCaller.Extensions
         /// <param name="headers">Request headers</param>
         /// <param name="accept">Accept HTTP header</param>
         /// <param name="timeout">Request timeout</param>
-        /// <param name="ignoreCertificateErrors">OBSOLETED AND IGNORED: Ignores SSL Certificate error if its true</param>
         /// <param name="maxAttempts">Maximum number of times to attempt the request. Cannot be less than 1.</param>
-        /// <exception cref="RestCallerException">Thrown when any error happened.</exception>
-        public static RestCallerResponse Get(this IRestCaller restCaller, Uri uri, IReadOnlyDictionary<string, string> parameters = null, IReadOnlyDictionary<string, string> headers = null,
-            string accept = "application/json", int timeout = 1 * 60 * 1000,
-            bool ignoreCertificateErrors = false, int maxAttempts = 1)
+        /// <exception cref="RESTCallerException">Thrown when any error happened.</exception>
+        public static RestCallerResponse Get(this IRESTCaller restCaller, Uri uri, IReadOnlyDictionary<string, string> parameters = null, 
+            IReadOnlyDictionary<string, string> headers = null, string accept = "application/json", int timeout = 1 * 60 * 1000,
+            int maxAttempts = 1)
         {
             Check.ArgumentIsNull(restCaller, "restCaller");
             Check.ArgumentIsNull(uri, "uri");
@@ -35,7 +34,6 @@ namespace Agero.Core.RestCaller.Extensions
                 httpHeaders: headers,
                 accept: accept,
                 timeout: timeout,
-                ignoreCertificateErrors: ignoreCertificateErrors,
                 maxAttempts: maxAttempts);
         }
 
@@ -46,12 +44,10 @@ namespace Agero.Core.RestCaller.Extensions
         /// <param name="headers">Request headers</param>
         /// <param name="accept">Accept HTTP header</param>
         /// <param name="timeout">Request timeout</param>
-        /// <param name="ignoreCertificateErrors">OBSOLETED AND IGNORED: Ignores SSL Certificate error if its true</param>
         /// <param name="maxAttempts">Maximum number of times to attempt the request. Cannot be less than 1.</param>
-        /// <exception cref="RestCallerException">Thrown when any error happened.</exception>
-        public static async Task<RestCallerResponse> GetAsync(this IRestCaller restCaller, Uri uri, IReadOnlyDictionary<string, string> parameters = null, IReadOnlyDictionary<string, string> headers = null,
-            string accept = "application/json", int timeout = 1 * 60 * 1000,
-            bool ignoreCertificateErrors = false, int maxAttempts = 1)
+        /// <exception cref="RESTCallerException">Thrown when any error happened.</exception>
+        public static async Task<RestCallerResponse> GetAsync(this IRESTCaller restCaller, Uri uri, IReadOnlyDictionary<string, string> parameters = null, 
+            IReadOnlyDictionary<string, string> headers = null, string accept = "application/json", int timeout = 1 * 60 * 1000, int maxAttempts = 1)
         {
             Check.ArgumentIsNull(restCaller, "restCaller");
             Check.ArgumentIsNull(uri, "uri");
@@ -67,7 +63,6 @@ namespace Agero.Core.RestCaller.Extensions
                 httpHeaders: headers,
                 accept: accept,
                 timeout: timeout,
-                ignoreCertificateErrors: ignoreCertificateErrors,
                 maxAttempts: maxAttempts);
         }
 
@@ -80,13 +75,12 @@ namespace Agero.Core.RestCaller.Extensions
         /// <param name="contentType">Content-Type HTTP header</param>
         /// <param name="accept">Accept HTTP header</param>
         /// <param name="timeout">Request timeout</param>
-        /// <param name="ignoreCertificateErrors">OBSOLETED AND IGNORED: Ignores SSL Certificate error if its true</param>
         /// <param name="compressBody">Compresses request using GZIP</param>
         /// <param name="maxAttempts">Maximum number of times to attempt the request. Cannot be less than 1.</param>
-        /// <exception cref="RestCallerException">Thrown when any error happened.</exception>
-        public static RestCallerResponse Post(this IRestCaller restCaller, Uri uri, string body = null, IReadOnlyDictionary<string, string> parameters = null, IReadOnlyDictionary<string, string> headers = null,
-            string contentType = "application/json; charset=utf-8", string accept = "application/json", int timeout = 1 * 60 * 1000,
-            bool ignoreCertificateErrors = false, bool compressBody = false, int maxAttempts = 1)
+        /// <exception cref="RESTCallerException">Thrown when any error happened.</exception>
+        public static RestCallerResponse Post(this IRESTCaller restCaller, Uri uri, string body = null, IReadOnlyDictionary<string, string> parameters = null, 
+            IReadOnlyDictionary<string, string> headers = null, string contentType = "application/json; charset=utf-8", string accept = "application/json", 
+            int timeout = 1 * 60 * 1000, bool compressBody = false, int maxAttempts = 1)
         {
             Check.ArgumentIsNull(restCaller, "restCaller");
             Check.ArgumentIsNull(uri, "uri");
@@ -101,7 +95,6 @@ namespace Agero.Core.RestCaller.Extensions
                 contentType: contentType,
                 accept: accept,
                 timeout: timeout,
-                ignoreCertificateErrors: ignoreCertificateErrors,
                 compressBody: compressBody,
                 maxAttempts: maxAttempts);
         }
@@ -115,13 +108,12 @@ namespace Agero.Core.RestCaller.Extensions
         /// <param name="contentType">Content-Type HTTP header</param>
         /// <param name="accept">Accept HTTP header</param>
         /// <param name="timeout">Request timeout</param>
-        /// <param name="ignoreCertificateErrors">OBSOLETED AND IGNORED: Ignores SSL Certificate error if its true</param>
         /// <param name="compressBody">Compresses request using GZIP</param>
         /// <param name="maxAttempts">Maximum number of times to attempt the request. Cannot be less than 1.</param>
-        /// <exception cref="RestCallerException">Thrown when any error happened.</exception>
-        public static async Task<RestCallerResponse> PostAsync(this IRestCaller restCaller, Uri uri, string body = null, IReadOnlyDictionary<string, string> parameters = null, IReadOnlyDictionary<string, string> headers = null,
-            string contentType = "application/json; charset=utf-8", string accept = "application/json", int timeout = 1 * 60 * 1000,
-            bool ignoreCertificateErrors = false, bool compressBody = false, int maxAttempts = 1)
+        /// <exception cref="RESTCallerException">Thrown when any error happened.</exception>
+        public static async Task<RestCallerResponse> PostAsync(this IRESTCaller restCaller, Uri uri, string body = null, IReadOnlyDictionary<string, string> parameters = null, 
+            IReadOnlyDictionary<string, string> headers = null, string contentType = "application/json; charset=utf-8", string accept = "application/json", 
+            int timeout = 1 * 60 * 1000, bool compressBody = false, int maxAttempts = 1)
         {
             Check.ArgumentIsNull(restCaller, "restCaller");
             Check.ArgumentIsNull(uri, "uri");
@@ -136,7 +128,6 @@ namespace Agero.Core.RestCaller.Extensions
                 contentType: contentType,
                 accept: accept,
                 timeout: timeout,
-                ignoreCertificateErrors: ignoreCertificateErrors,
                 compressBody: compressBody,
                 maxAttempts: maxAttempts);
         }
@@ -150,13 +141,12 @@ namespace Agero.Core.RestCaller.Extensions
         /// <param name="contentType">Content-Type HTTP header</param>
         /// <param name="accept">Accept HTTP header</param>
         /// <param name="timeout">Request timeout</param>
-        /// <param name="ignoreCertificateErrors">OBSOLETED AND IGNORED: Ignores SSL Certificate error if its true</param>
         /// <param name="compressBody">Compresses request using GZIP</param>
         /// <param name="maxAttempts">Maximum number of times to attempt the request. Cannot be less than 1.</param>
-        /// <exception cref="RestCallerException">Thrown when any error happened.</exception>
-        public static RestCallerResponse Put(this IRestCaller restCaller, Uri uri, string body = null, IReadOnlyDictionary<string, string> parameters = null, IReadOnlyDictionary<string, string> headers = null,
-            string contentType = "application/json; charset=utf-8", string accept = "application/json", int timeout = 1 * 60 * 1000,
-            bool ignoreCertificateErrors = false, bool compressBody = false, int maxAttempts = 1)
+        /// <exception cref="RESTCallerException">Thrown when any error happened.</exception>
+        public static RestCallerResponse Put(this IRESTCaller restCaller, Uri uri, string body = null, IReadOnlyDictionary<string, string> parameters = null, 
+            IReadOnlyDictionary<string, string> headers = null, string contentType = "application/json; charset=utf-8", string accept = "application/json", 
+            int timeout = 1 * 60 * 1000, bool compressBody = false, int maxAttempts = 1)
         {
             Check.ArgumentIsNull(restCaller, "restCaller");
             Check.ArgumentIsNull(uri, "uri");
@@ -171,7 +161,6 @@ namespace Agero.Core.RestCaller.Extensions
                 contentType: contentType,
                 accept: accept,
                 timeout: timeout,
-                ignoreCertificateErrors: ignoreCertificateErrors,
                 compressBody: compressBody,
                 maxAttempts: maxAttempts);
         }
@@ -185,13 +174,12 @@ namespace Agero.Core.RestCaller.Extensions
         /// <param name="contentType">Content-Type HTTP header</param>
         /// <param name="accept">Accept HTTP header</param>
         /// <param name="timeout">Request timeout</param>
-        /// <param name="ignoreCertificateErrors">OBSOLETED AND IGNORED: Ignores SSL Certificate error if its true</param>
         /// <param name="compressBody">Compresses request using GZIP</param>
         /// <param name="maxAttempts">Maximum number of times to attempt the request. Cannot be less than 1.</param>
-        /// <exception cref="RestCallerException">Thrown when any error happened.</exception>
-        public static async Task<RestCallerResponse> PutAsync(this IRestCaller restCaller, Uri uri, string body = null, IReadOnlyDictionary<string, string> parameters = null, IReadOnlyDictionary<string, string> headers = null,
-            string contentType = "application/json; charset=utf-8", string accept = "application/json", int timeout = 1 * 60 * 1000,
-            bool ignoreCertificateErrors = false, bool compressBody = false, int maxAttempts = 1)
+        /// <exception cref="RESTCallerException">Thrown when any error happened.</exception>
+        public static async Task<RestCallerResponse> PutAsync(this IRESTCaller restCaller, Uri uri, string body = null, IReadOnlyDictionary<string, string> parameters = null, 
+            IReadOnlyDictionary<string, string> headers = null, string contentType = "application/json; charset=utf-8", string accept = "application/json", 
+            int timeout = 1 * 60 * 1000, bool compressBody = false, int maxAttempts = 1)
         {
             Check.ArgumentIsNull(restCaller, "restCaller");
             Check.ArgumentIsNull(uri, "uri");
@@ -206,7 +194,6 @@ namespace Agero.Core.RestCaller.Extensions
                 contentType: contentType,
                 accept: accept,
                 timeout: timeout,
-                ignoreCertificateErrors: ignoreCertificateErrors,
                 compressBody: compressBody,
                 maxAttempts: maxAttempts);
         }
@@ -220,13 +207,12 @@ namespace Agero.Core.RestCaller.Extensions
         /// <param name="contentType">Content-Type HTTP header</param>
         /// <param name="accept">Accept HTTP header</param>
         /// <param name="timeout">Request timeout</param>
-        /// <param name="ignoreCertificateErrors">OBSOLETED AND IGNORED: Ignores SSL Certificate error if its true</param>
         /// <param name="compressBody">Compresses request using GZIP</param>
         /// <param name="maxAttempts">Maximum number of times to attempt the request. Cannot be less than 1.</param>
-        /// <exception cref="RestCallerException">Thrown when any error happened.</exception>
-        public static RestCallerResponse Delete(this IRestCaller restCaller, Uri uri, string body = null, IReadOnlyDictionary<string, string> parameters = null, IReadOnlyDictionary<string, string> headers = null,
-            string contentType = "application/json; charset=utf-8", string accept = "application/json", int timeout = 1 * 60 * 1000,
-            bool ignoreCertificateErrors = false, bool compressBody = false, int maxAttempts = 1)
+        /// <exception cref="RESTCallerException">Thrown when any error happened.</exception>
+        public static RestCallerResponse Delete(this IRESTCaller restCaller, Uri uri, string body = null, IReadOnlyDictionary<string, string> parameters = null, 
+            IReadOnlyDictionary<string, string> headers = null, string contentType = "application/json; charset=utf-8", string accept = "application/json", 
+            int timeout = 1 * 60 * 1000, bool compressBody = false, int maxAttempts = 1)
         {
             Check.ArgumentIsNull(restCaller, "restCaller");
             Check.ArgumentIsNull(uri, "uri");
@@ -241,7 +227,6 @@ namespace Agero.Core.RestCaller.Extensions
                 contentType: contentType,
                 accept: accept,
                 timeout: timeout,
-                ignoreCertificateErrors: ignoreCertificateErrors,
                 compressBody: compressBody,
                 maxAttempts: maxAttempts);
         }
@@ -255,13 +240,12 @@ namespace Agero.Core.RestCaller.Extensions
         /// <param name="contentType">Content-Type HTTP header</param>
         /// <param name="accept">Accept HTTP header</param>
         /// <param name="timeout">Request timeout</param>
-        /// <param name="ignoreCertificateErrors">OBSOLETED AND IGNORED: Ignores SSL Certificate error if its true</param>
         /// <param name="compressBody">Compresses request using GZIP</param>
         /// <param name="maxAttempts">Maximum number of times to attempt the request. Cannot be less than 1.</param>
-        /// <exception cref="RestCallerException">Thrown when any error happened.</exception>
-        public static async Task<RestCallerResponse> DeleteAsync(this IRestCaller restCaller, Uri uri, string body = null, IReadOnlyDictionary<string, string> parameters = null, IReadOnlyDictionary<string, string> headers = null,
-            string contentType = "application/json; charset=utf-8", string accept = "application/json", int timeout = 1 * 60 * 1000,
-            bool ignoreCertificateErrors = false, bool compressBody = false, int maxAttempts = 1)
+        /// <exception cref="RESTCallerException">Thrown when any error happened.</exception>
+        public static async Task<RestCallerResponse> DeleteAsync(this IRESTCaller restCaller, Uri uri, string body = null, IReadOnlyDictionary<string, string> parameters = null, 
+            IReadOnlyDictionary<string, string> headers = null, string contentType = "application/json; charset=utf-8", string accept = "application/json", int timeout = 1 * 60 * 1000,
+            bool compressBody = false, int maxAttempts = 1)
         {
             Check.ArgumentIsNull(restCaller, "restCaller");
             Check.ArgumentIsNull(uri, "uri");
@@ -276,7 +260,6 @@ namespace Agero.Core.RestCaller.Extensions
                 contentType: contentType,
                 accept: accept,
                 timeout: timeout,
-                ignoreCertificateErrors: ignoreCertificateErrors,
                 compressBody: compressBody,
                 maxAttempts: maxAttempts);
         }

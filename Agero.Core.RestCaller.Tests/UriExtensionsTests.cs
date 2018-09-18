@@ -1,10 +1,10 @@
-﻿using Agero.Core.RestCaller.Extensions;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Agero.Core.RestCaller.Extensions;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Agero.Core.RestCaller.Tests.Extensions
+namespace Agero.Core.RestCaller.Tests
 {
     [TestClass]
     public class UriExtensionsTests

@@ -3,14 +3,14 @@
     <PropertyGroup>
         <TargetFrameworks>netstandard2.0</TargetFrameworks>
         <PackageId>Agero.Core.RestCaller</PackageId>
-        <PackageTags>restcaller</PackageTags>
+        <PackageTags>rest, api</PackageTags>
         <Version>1.0.0</Version>
         <Authors>Core Automation Team</Authors>        
         <Company>Agero Inc.</Company>
         <Copyright>Copyright © Agero 2018</Copyright>
-        <Product>Rest Caller</Product>
-        <Description>Framework to make RESTful calls</Description>
-        <Title>Rest Caller</Title>
+        <Product>REST Caller</Product>
+        <Description>Framework to make RESTful calls in .NET applications.</Description>
+        <Title>REST Caller</Title>
         <PackageProjectUrl>https://github.com/agero-core/rest-caller</PackageProjectUrl>
         <PackageReleaseNotes></PackageReleaseNotes>
         <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>

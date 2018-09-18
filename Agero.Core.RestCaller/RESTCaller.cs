@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 namespace Agero.Core.RestCaller
 {
     /// <summary>REST client to make REST calls</summary>
-    public class RestCaller : IRestCaller
+    public class RESTCaller : IRESTCaller
     {
         private static readonly IReadOnlyCollection<WebExceptionStatus> _transientWebExceptionStatuses =
             new[]
@@ -38,13 +38,12 @@ namespace Agero.Core.RestCaller
         /// <param name="contentType">Content-Type HTTP header</param>
         /// <param name="accept">Accept HTTP header</param>
         /// <param name="timeout">Request timeout</param>
-        /// <param name="ignoreCertificateErrors">OBSOLETED AND IGNORED: Ignores SSL Certificate error if its true</param>
         /// <param name="compressBody">Compresses request using GZIP</param>
         /// <param name="maxAttempts">Maximum number of times to attempt the request. Cannot be less than 1.</param>
-        /// <exception cref="RestCallerException">Thrown when any error happened.</exception>
-        public RestCallerResponse MakeRequest(Uri uri, string httpMethod, IReadOnlyDictionary<string, string> parameters = null, IReadOnlyDictionary<string, string> httpHeaders = null,
-            string body = null, string contentType = "application/json; charset=utf-8", string accept = "application/json", int timeout = 1 * 60 * 1000,
-            bool ignoreCertificateErrors = false, bool compressBody = false, int maxAttempts = 1)
+        /// <exception cref="RESTCallerException">Thrown when any error happened.</exception>
+        public RestCallerResponse MakeRequest(Uri uri, string httpMethod, IReadOnlyDictionary<string, string> parameters = null, 
+            IReadOnlyDictionary<string, string> httpHeaders = null, string body = null, string contentType = "application/json; charset=utf-8", 
+            string accept = "application/json", int timeout = 1 * 60 * 1000, bool compressBody = false, int maxAttempts = 1)
         {
             Check.ArgumentIsNull(uri, "uri");
             Check.ArgumentIsNullOrWhiteSpace(httpMethod, "httpMethod");
@@ -123,7 +122,7 @@ namespace Agero.Core.RestCaller
             }
             catch (Exception ex)
             {
-                throw new RestCallerException("REST Caller Error.", ex, attemptErrors);
+                throw new RESTCallerException("REST Caller Error.", ex, attemptErrors);
             }
         }
 
@@ -136,13 +135,12 @@ namespace Agero.Core.RestCaller
         /// <param name="contentType">Content-Type HTTP header</param>
         /// <param name="accept">Accept HTTP header</param>
         /// <param name="timeout">Request timeout</param>
-        /// <param name="ignoreCertificateErrors">OBSOLETED AND IGNORED: Ignores SSL Certificate error if its true</param>
         /// <param name="compressBody">Compresses request using GZIP</param>
         /// <param name="maxAttempts">Maximum number of times to attempt the request. Cannot be less than 1.</param>
-        /// <exception cref="RestCallerException">Thrown when any error happened.</exception>
-        public async Task<RestCallerResponse> MakeRequestAsync(Uri uri, string httpMethod, IReadOnlyDictionary<string, string> parameters = null, IReadOnlyDictionary<string, string> httpHeaders = null,
-            string body = null, string contentType = "application/json; charset=utf-8", string accept = "application/json", int timeout = 1 * 60 * 1000,
-            bool ignoreCertificateErrors = false, bool compressBody = false, int maxAttempts = 1)
+        /// <exception cref="RESTCallerException">Thrown when any error happened.</exception>
+        public async Task<RestCallerResponse> MakeRequestAsync(Uri uri, string httpMethod, IReadOnlyDictionary<string, string> parameters = null, 
+            IReadOnlyDictionary<string, string> httpHeaders = null, string body = null, string contentType = "application/json; charset=utf-8", 
+            string accept = "application/json", int timeout = 1 * 60 * 1000, bool compressBody = false, int maxAttempts = 1)
         {
             Check.ArgumentIsNull(uri, "uri");
             Check.ArgumentIsNullOrWhiteSpace(httpMethod, "httpMethod");
@@ -221,7 +219,7 @@ namespace Agero.Core.RestCaller
             }
             catch (Exception ex)
             {
-                throw new RestCallerException("REST Caller Error.", ex, attemptErrors);
+                throw new RESTCallerException("REST Caller Error.", ex, attemptErrors);
             }
         }
 
