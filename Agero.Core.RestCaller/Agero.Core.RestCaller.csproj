@@ -9,7 +9,7 @@
         <Company>Agero Inc.</Company>
         <Copyright>Copyright © Agero 2018</Copyright>
         <Product>REST Caller</Product>
-        <Description>Framework to make RESTful calls in .NET applications.</Description>
+        <Description>Library to make RESTful calls in .NET applications.</Description>
         <Title>REST Caller</Title>
         <PackageProjectUrl>https://github.com/agero-core/rest-caller</PackageProjectUrl>
         <PackageReleaseNotes></PackageReleaseNotes>
