@@ -18,7 +18,7 @@ namespace Agero.Core.RestCaller
     {
         private const int WAIT_TIMEOUT_IN_MILLISECONDS_AFTER_FIRST_ATTEMPT = 100;
 
-        private IRetryStrategy retryStrategy;
+        private readonly IRetryStrategy _retryStrategy;
 
         /// <summary>
         /// Creates a new instance of <see cref="RESTCaller"/> using the
@@ -37,9 +37,9 @@ namespace Agero.Core.RestCaller
         /// determining if an error is transient or not.</param>
         public RESTCaller(IRetryStrategy retryStrategy)
         {
-            Check.ArgumentIsNull<IRetryStrategy>(retryStrategy, "retryStrategy");
+            Check.ArgumentIsNull(retryStrategy, nameof(retryStrategy));
 
-            this.retryStrategy = retryStrategy;
+            _retryStrategy = retryStrategy;
         }
 
         /// <summary>Makes request based on httpMethod</summary>
@@ -116,7 +116,7 @@ namespace Agero.Core.RestCaller
                     {
                         attemptErrors.Add(ex);
 
-                        if (attemptErrors.Count < maxAttempts && retryStrategy.IsTransient(ex))
+                        if (attemptErrors.Count < maxAttempts && _retryStrategy.IsTransient(ex))
                         {
                             Thread.Sleep(WAIT_TIMEOUT_IN_MILLISECONDS_AFTER_FIRST_ATTEMPT * attemptErrors.Count);
                             continue;
@@ -213,7 +213,7 @@ namespace Agero.Core.RestCaller
                     {
                         attemptErrors.Add(ex);
 
-                        if (attemptErrors.Count < maxAttempts && retryStrategy.IsTransient(ex))
+                        if (attemptErrors.Count < maxAttempts && _retryStrategy.IsTransient(ex))
                         {
                             await Task.Delay(WAIT_TIMEOUT_IN_MILLISECONDS_AFTER_FIRST_ATTEMPT * attemptErrors.Count).ConfigureAwait(false);
                             continue;

@@ -10,7 +10,7 @@ namespace Agero.Core.RestCaller.Tests
     [TestClass]
     public class DefaultStrategyTests
     {
-        static IRetryStrategy retryStrategy = new DefaultRetryStrategy();
+        private static IRetryStrategy _retryStrategy = new DefaultRetryStrategy();
 
         [DataTestMethod]
         [DataRow(WebExceptionStatus.ConnectFailure)]
@@ -24,7 +24,7 @@ namespace Agero.Core.RestCaller.Tests
         {
             var ex = new WebException(status.ToString(), status);
 
-            Assert.IsTrue(retryStrategy.IsTransient(ex));
+            Assert.IsTrue(_retryStrategy.IsTransient(ex));
         }
 
         [DataTestMethod]
@@ -46,7 +46,7 @@ namespace Agero.Core.RestCaller.Tests
         {
             var ex = new WebException(status.ToString(), status);
 
-            Assert.IsFalse(retryStrategy.IsTransient(ex));
+            Assert.IsFalse(_retryStrategy.IsTransient(ex));
         }
     }
 }

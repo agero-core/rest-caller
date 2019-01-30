@@ -31,7 +31,11 @@ namespace Agero.Core.RestCaller.Strategies
                 WebExceptionStatus.Timeout
             };
 
-        /// <inheritDoc />
+        /// <summary>
+        /// Determines whether or not the error is transient.
+        /// </summary>
+        /// <param name="webException">The <see cref="WebException"/> to apply the strategy too.</param>
+        /// <returns><c>true</c> if the error is transient, otherwise <c>false</c>.</returns>
         public bool IsTransient(WebException webException)
         {
             return _transientWebExceptionStatuses.Contains(webException.Status);
