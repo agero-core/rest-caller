@@ -1,6 +1,7 @@
 ﻿using Agero.Core.Checker;
 using Agero.Core.RestCaller.Exceptions;
 using Agero.Core.RestCaller.Extensions;
+using Agero.Core.RestCaller.Strategies;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -15,19 +16,31 @@ namespace Agero.Core.RestCaller
     /// <summary>REST client to make REST calls</summary>
     public class RESTCaller : IRESTCaller
     {
-        private static readonly IReadOnlyCollection<WebExceptionStatus> _transientWebExceptionStatuses =
-            new[]
-            {
-                WebExceptionStatus.ConnectFailure,
-                WebExceptionStatus.ConnectionClosed,
-                WebExceptionStatus.NameResolutionFailure,
-                WebExceptionStatus.PipelineFailure,
-                WebExceptionStatus.ReceiveFailure,
-                WebExceptionStatus.SendFailure,
-                WebExceptionStatus.Timeout
-            };
-
         private const int WAIT_TIMEOUT_IN_MILLISECONDS_AFTER_FIRST_ATTEMPT = 100;
+
+        private readonly IRetryStrategy _retryStrategy;
+
+        /// <summary>
+        /// Creates a new instance of <see cref="RESTCaller"/> using the
+        /// <see cref="DefaultRetryStrategy"/>.
+        /// </summary>
+        public RESTCaller()
+            : this(new DefaultRetryStrategy())
+        {
+        }
+
+        /// <summary>
+        /// Creates a new instance of <see cref="RESTCaller"/> using the
+        /// provided <see cref="IRetryStrategy"/>.
+        /// </summary>
+        /// <param name="retryStrategy">In implementation of <see cref="IRetryStrategy"/> to use when
+        /// determining if an error is transient or not.</param>
+        public RESTCaller(IRetryStrategy retryStrategy)
+        {
+            Check.ArgumentIsNull(retryStrategy, nameof(retryStrategy));
+
+            _retryStrategy = retryStrategy;
+        }
 
         /// <summary>Makes request based on httpMethod</summary>
         /// <param name="uri">Request URL</param>
@@ -103,7 +116,7 @@ namespace Agero.Core.RestCaller
                     {
                         attemptErrors.Add(ex);
 
-                        if (attemptErrors.Count < maxAttempts && _transientWebExceptionStatuses.Contains(ex.Status))
+                        if (attemptErrors.Count < maxAttempts && _retryStrategy.IsTransient(ex))
                         {
                             Thread.Sleep(WAIT_TIMEOUT_IN_MILLISECONDS_AFTER_FIRST_ATTEMPT * attemptErrors.Count);
                             continue;
@@ -200,7 +213,7 @@ namespace Agero.Core.RestCaller
                     {
                         attemptErrors.Add(ex);
 
-                        if (attemptErrors.Count < maxAttempts && _transientWebExceptionStatuses.Contains(ex.Status))
+                        if (attemptErrors.Count < maxAttempts && _retryStrategy.IsTransient(ex))
                         {
                             await Task.Delay(WAIT_TIMEOUT_IN_MILLISECONDS_AFTER_FIRST_ATTEMPT * attemptErrors.Count).ConfigureAwait(false);
                             continue;
